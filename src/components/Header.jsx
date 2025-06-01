@@ -1,12 +1,19 @@
 import { motion } from "framer-motion";
 import { FiGithub, FiInstagram, FiLinkedin, FiMenu, FiX} from "react-icons/fi";
 import { useState } from "react";
+import { div } from "framer-motion/client";
 
 
 const Header = () => {
 //toggle menu state
 const [isOpen, setIsOpen] = useState(false);
 const tooggleMenu = () => setIsOpen(!isOpen)
+
+// state to track if the contact form is open
+const [ contactFormOpen, setContactFormOpen ] = useState(false);
+
+const openContactForm = () => setContactFormOpen(true)
+const closeContactForm = () => setContactFormOpen(false)
 
     return (
        <header className="absolute w-full  z-50
@@ -102,6 +109,7 @@ const tooggleMenu = () => setIsOpen(!isOpen)
 
             {/* hire me button */}
             <motion.button 
+            onClick={openContactForm}
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ 
@@ -175,6 +183,41 @@ const tooggleMenu = () => setIsOpen(!isOpen)
         </div>
     </motion.div>
 
+    {/* contact form */}
+    {contactFormOpen && (
+        <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        transition={{ duration: 0.5 }}
+        className="fixed inset-0 bg-black/50 background-blur-sm z-50 flex
+        items-center justify-center p-4"
+        >
+
+            <div
+               className="bg-white dark:bg-gray-800 rounded-xl shadow-xl
+               w-full max-w-md p-6"
+            >
+
+                <div className="flex justify-between items-center 
+                mb-4">
+                    <h1 className="text-2xl font-bold
+                    text-gray-300">
+                        Get In Touch
+                    </h1>
+
+                    <button onClick={closeContactForm}>
+                        <FiX className="w-5 h-5 text-gray-300
+                        font-extrabold" />
+                    </button>
+                </div>
+
+                {/* input form */}
+
+            </div>
+
+        </motion.div>
+    )}
 
        </header>
     )
