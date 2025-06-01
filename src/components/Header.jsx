@@ -150,6 +150,29 @@ const tooggleMenu = () => setIsOpen(!isOpen)
         ))}
         </nav>
 
+        <div className="pt-4 border-t border-gray-200
+        dark:border-gray-700">
+            <div className="flex space-x-5">
+                <a href="#">
+                    <FiGithub className="h-5 w-5 text-gray-300" />
+                </a>
+                <a href="#">
+                    <FiInstagram className="h-5 w-5 text-gray-300" />
+                </a>
+                <a href="#">
+                    <FiLinkedin className="h-5 w-5 text-gray-300" />
+                </a>
+            </div>
+
+            <button
+            onClick={() => {
+                tooggleMenu()
+            }}
+            className="mt-4 w-full px-4 py-2 rounded-lg
+            bg-gradient-to-r from-violet-600 to-violet-400 font-bold">
+                Contact Me
+            </button>
+        </div>
     </motion.div>
 
 
