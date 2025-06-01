@@ -1,8 +1,13 @@
 import { motion } from "framer-motion";
-import { a } from "framer-motion/client"
-import { FiGithub, FiInstagram, FiLinkedin,} from "react-icons/fi";
+import { FiGithub, FiInstagram, FiLinkedin, FiMenu, FiX} from "react-icons/fi";
+import { useState } from "react";
+
 
 const Header = () => {
+//toggle menu state
+const [isOpen, setIsOpen] = useState(false);
+const tooggleMenu = () => setIsOpen(!isOpen)
+
     return (
        <header className="absolute w-full  z-50
        transition-all duration-300">
@@ -93,7 +98,7 @@ const Header = () => {
                 dark:hover:text-violet-400 transition-colors duration-300" href="#">
                     <FiLinkedin className="w-5 h-5" />
                 </motion.a>
-            </div>
+          
 
             {/* hire me button */}
             <motion.button 
@@ -112,8 +117,41 @@ const Header = () => {
             transition-all duration-500">
                 Hire Me
             </motion.button>
-
         </div>
+
+        {/* mobile menu button */}
+        <div className="md:hidden flex items-center">
+              <motion.button 
+              whileTap={{ scale: 0.7}}
+              onClick={tooggleMenu}
+              className="text-gray-300">
+                { isOpen ? <FiX className="h-6 w-6" /> : <FiMenu className="h-6 w-6" />}
+              </motion.button>
+        </div>
+     </div>
+
+     {/* mobile menu */}
+    <motion.div
+    initial={{ opacity: 0, height: 0 }}
+    animate={{
+        opacity: isOpen ? 1 : 0,
+        height: isOpen ? "auto" : 0,
+    }}
+    transition={{ duration: 0.5 }}
+    className="md:hidden overflow-hiddden bg-white dark:bg-gray-900 shadow-lg
+    px-4 py-5 space-y-5">
+        <nav className="flex flex-col space-y-3">
+           {["Home", "About", "Projects", "Contact"].map((item) =>
+            (
+                <a onClick={tooggleMenu} className="text-gray-300 font-medium py-2" key={item} href="#">
+                    {item}
+                </a>
+
+        ))}
+        </nav>
+
+    </motion.div>
+
 
        </header>
     )
